@@ -1,10 +1,7 @@
 import { chromium, type FullConfig } from '@playwright/test';
 import 'dotenv/config';
 
-/**
- * Global setup: Basic Auth + API signin, збереження storageState
- * ВАЖЛИВО: приймаємо параметр типу FullConfig — тоді TS не свариться у playwright.config.ts
- */
+
 export default async function globalSetup(_config: FullConfig): Promise<void> {
   const BASE_URL       = process.env.BASE_URL       ?? 'https://qauto.forstudy.space';
   const BASIC_USER     = process.env.BASIC_USER     ?? 'guest';

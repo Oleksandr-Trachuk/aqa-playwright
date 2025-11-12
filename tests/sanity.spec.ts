@@ -6,10 +6,9 @@ const EMAIL = process.env.QAUTO_EMAIL ?? 'lanifel629@foxroids.com';
 const PASS  = process.env.QAUTO_PASSWORD ?? '1q2w3e4r5T';
 
 test('GET /api/cars returns ok (with fallback signin)', async ({ page }) => {
-  // 1) Йдемо на origin, щоб застосувалась Basic Auth з конфіга
+  
   await page.goto(new URL('/', BASE).toString());
 
-  // Допоміжні функції, що виконуються всередині браузера
   const apiGetCars = async () => {
     return await page.evaluate(async () => {
       const res = await fetch('/api/cars', {
@@ -38,11 +37,7 @@ test('GET /api/cars returns ok (with fallback signin)', async ({ page }) => {
       return { ok: res.ok, status: res.status, json };
     }, { email, password });
   };
-
-  // 2) Перший запит
   let r = await apiGetCars();
-
-  // 3) Якщо 401 — робимо логін і повторюємо
   if (r.status === 401) {
     const signin = await apiSignin(EMAIL, PASS);
     if (!signin.ok) {
@@ -51,7 +46,7 @@ test('GET /api/cars returns ok (with fallback signin)', async ({ page }) => {
     r = await apiGetCars();
   }
 
-  // 4) Фінальна перевірка
+
   console.log('GET /api/cars →', r.status, r.json);
   expect(r.ok, `GET /api/cars status=${r.status} body=${JSON.stringify(r.json)}`).toBeTruthy();
   expect((r.json?.status ?? 'ok')).toBe('ok');
