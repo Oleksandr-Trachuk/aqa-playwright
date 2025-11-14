@@ -1,37 +1,38 @@
 ﻿import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
+
+// Load .env variables
+dotenv.config();
+
+const BASE_URL = process.env.BASE_URL || 'https://qauto.forstudy.space';
+const HTTP_USERNAME = process.env.HTTP_USERNAME;
+const HTTP_PASSWORD = process.env.HTTP_PASSWORD;
 
 export default defineConfig({
   testDir: './tests',
-
-  timeout: 30_000,
-  expect: {
-    timeout: 5_000,
-  },
+  fullyParallel: true,
+  retries: 0,
+  reporter: [['html', { outputFolder: 'playwright-report' }]],
 
   use: {
-  
-    baseURL: 'https://qauto.forstudy.space',
+    baseURL: BASE_URL,
 
-  
-    httpCredentials: {
-      username: 'guest',
-      password: 'welcome2qauto',
-    },
+    httpCredentials: HTTP_USERNAME && HTTP_PASSWORD
+      ? {
+          username: HTTP_USERNAME,
+          password: HTTP_PASSWORD,
+        }
+      : undefined,
 
-    trace: 'on-first-retry',
+    headless: true,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    headless: false,
   },
 
   projects: [
     {
       name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-      },
-    },
+      use: { ...devices['Desktop Chrome'] },
+    }
   ],
-
-  reporter: [['list']],
 });
