@@ -9,10 +9,10 @@ export default defineConfig({
   },
 
   use: {
-    // Базовий URL
+  
     baseURL: 'https://qauto.forstudy.space',
 
-    // 🔐 BASIC AUTH для сайту
+  
     httpCredentials: {
       username: 'guest',
       password: 'welcome2qauto',
@@ -21,7 +21,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    headless: false, // можеш ставити true, якщо хочеш без UI
+    headless: false,
   },
 
   projects: [

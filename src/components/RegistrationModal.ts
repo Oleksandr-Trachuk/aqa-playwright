@@ -25,7 +25,6 @@ export class RegistrationModal {
 
     this.form = this.dialog.locator('form').first();
 
-    // ⬇️ ЦІ локатори потім при бажанні можна взяти з codegen
     this.firstNameInput = this.form.getByPlaceholder(/name/i).first();
     this.lastNameInput = this.form.getByPlaceholder(/last name/i);
     this.emailInput = this.form.getByPlaceholder(/email/i);
