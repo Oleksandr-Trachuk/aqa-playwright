@@ -1,44 +1,37 @@
-﻿/// <reference types="node" />
-import { defineConfig, devices } from '@playwright/test';
-import 'dotenv/config';
-
-const BASE_URL   = process.env.BASE_URL   ?? 'https://qauto.forstudy.space';
-const BASIC_USER = process.env.BASIC_USER ?? 'guest';
-const BASIC_PASS = process.env.BASIC_PASS ?? 'welcome2qauto';
+﻿import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: 'tests',
+  testDir: './tests',
+
   timeout: 30_000,
-  expect: { timeout: 5_000 },
-
-  fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 2 : undefined,
-
-  reporter: [
-    ['list'],
-    ['html', { open: 'never', outputFolder: 'playwright-report' }]
-  ],
+  expect: {
+    timeout: 5_000,
+  },
 
   use: {
-    baseURL: BASE_URL,
-    timezoneId: 'Europe/Warsaw',
-    locale: 'uk-UA',
-    headless: true,
+    // Базовий URL
+    baseURL: 'https://qauto.forstudy.space',
+
+    // 🔐 BASIC AUTH для сайту
+    httpCredentials: {
+      username: 'guest',
+      password: 'welcome2qauto',
+    },
+
+    trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'off',
-    trace: 'retain-on-failure',
-    storageState: 'auth/storageState.json',
-    httpCredentials: { username: BASIC_USER, password: BASIC_PASS }
+    video: 'retain-on-failure',
+    headless: false, // можеш ставити true, якщо хочеш без UI
   },
 
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit',   use: { ...devices['Desktop Safari'] } }
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
   ],
 
-  globalSetup: './global-setup',
-  outputDir: 'test-results'
+  reporter: [['list']],
 });
