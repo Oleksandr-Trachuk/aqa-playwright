@@ -72,7 +72,6 @@ export class RegistrationModal {
         await this.termsCheckbox.check({ force: true });
       }
     } catch {
-      // якщо немає чекбокса — ігноруємо
     }
   }
 
