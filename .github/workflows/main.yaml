@@ -10,8 +10,19 @@ jobs:
   playwright-tests:
     name: Playwright tests in Docker
     runs-on: ubuntu-latest
+
+    # Тести всередині Docker-контейнера
     container:
       image: mcr.microsoft.com/playwright:v1.39.0-jammy
+
+    # Тут підставляємо те, що в тебе в .env локально
+    env:
+      BASE_URL: https://qauto.forstudy.space
+      HTTP_USERNAME: guest
+      HTTP_PASSWORD: welcome2qauto
+      QAUTO_USER_EMAIL: lanifel629@foxroids.com
+      QAUTO_USER_PASSWORD: 1q2w3e4r5T
+      CI: true
 
     steps:
       - name: Checkout repository
