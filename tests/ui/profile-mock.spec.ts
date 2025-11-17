@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Профіль показує дані з підміненої відповіді', async ({ page }) => {
-  // Формат відповіді ТАКИЙ САМИЙ, як у /api/Users/Profile
+test('profile with changes', async ({ page }) => {
   const mockedProfile = {
     status: 'ok',
     userId: 999,
@@ -14,7 +13,6 @@ test('Профіль показує дані з підміненої відпо�
 
   let intercepted = false;
 
-  // 1. Перехоплюємо запит профілю (регістр неважливий)
   await page.route(/\/api\/users\/profile/i, async (route) => {
     if (route.request().method() !== 'GET') {
       return route.continue();
@@ -29,23 +27,9 @@ test('Профіль показує дані з підміненої відпо�
     });
   });
 
-  // 2. Відкриваємо сторінку профілю (ти вже залогінений через setup)
   await page.goto('/panel/profile');
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(1000);
-
-  // 3. Перевіряємо, що ми ДІЙСНО підмінили потрібний запит
   expect(intercepted).toBe(true);
 
-  // ====== TODO: перевірка UI ======
-  // Тут треба додати перевірку видимого елемента на сторінці,
-  // який показує імʼя/прізвище з профілю.
-  //
-  // Приклад (ТІЛЬКИ ПРИКЛАД!), куди ти підставиш свій локатор:
-  //
-  // const nameElement = page.locator('CSS_АБО_ROLE_СЕЛЕКТОР_ДЛЯ_ІМЕНІ');
-  // await expect(nameElement).toHaveText(/Oleksandr/i);
-  //
-  // const lastNameElement = page.locator('CSS_АБО_ROLE_СЕЛЕКТОР_ДЛЯ_ПРІЗВИЩА');
-  // await expect(lastNameElement).toHaveText(/MockedUser/i);
 });
