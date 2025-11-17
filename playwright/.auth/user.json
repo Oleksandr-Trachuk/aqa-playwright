@@ -1,0 +1,73 @@
+{
+  "cookies": [
+    {
+      "name": "YSC",
+      "value": "oDdUviHkRI4",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://forstudy.space",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "1pp42xt-hSc",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1778937147.488341,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://forstudy.space",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJQTBIhEh0SGwsMDg8QERITFBUWFxgZGhscHR4fICEiIyQlJiA6",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1778937147.488423,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://forstudy.space",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-ROLLOUT_TOKEN",
+      "value": "CNqG9aPx24Hf4AEQzO3ByqH5kAMYzO3ByqH5kAM%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1778937147.488483,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://forstudy.space",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "sid",
+      "value": "s%3AcSDuoW4v6GlUtjk9hST-2rKAfnIOEcUM.ZFxTOHy0y6%2FW9CDYnmlMybSCj7GNNyfd25z61vz5veg",
+      "domain": ".forstudy.space",
+      "path": "/",
+      "expires": 1763471549.192885,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://www.youtube.com",
+      "localStorage": [
+        {
+          "name": "ytidb::LAST_RESULT_ENTRY_KEY",
+          "value": "{\"data\":{\"hasSucceededOnce\":true},\"expiration\":1765977148067,\"creation\":1763385148067}"
+        }
+      ]
+    }
+  ]
+}
