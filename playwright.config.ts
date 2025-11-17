@@ -10,7 +10,7 @@ export default defineConfig({
     timeout: 5_000,
   },
   use: {
-    baseURL: process.env.BASE_URL, // https://qauto.forstudy.space/panel
+    baseURL: process.env.BASE_URL || 'https://qauto.forstudy.space',
     httpCredentials: {
       username: process.env.HTTP_USERNAME || '',
       password: process.env.HTTP_PASSWORD || '',
@@ -19,10 +19,9 @@ export default defineConfig({
   },
 
   projects: [
-    // ---- SETUP ----
     {
       name: 'setup',
-      testMatch: /.*auth\.setup\.spec\.ts/, // тільки setup-тест
+      testMatch: /.*auth\.setup\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
       },
@@ -32,6 +31,7 @@ export default defineConfig({
       testMatch: /^(?!.*auth\.setup\.spec\.ts$).*\.spec\.ts$/,
       use: {
         ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
       },
       dependencies: ['setup'],
     },
